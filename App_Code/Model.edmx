@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="canevasModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="canevasModelStoreContainer">
+          <EntitySet Name="cellule" EntityType="canevasModel.Store.cellule" store:Type="Tables" Schema="canevas" />
+          <EntitySet Name="colonne" EntityType="canevasModel.Store.colonne" store:Type="Tables" Schema="canevas" />
+          <EntitySet Name="droit_remplissage" EntityType="canevasModel.Store.droit_remplissage" store:Type="Tables" Schema="canevas" />
+          <EntitySet Name="ligne" EntityType="canevasModel.Store.ligne" store:Type="Tables" Schema="canevas" />
+          <EntitySet Name="tableau" EntityType="canevasModel.Store.tableau" store:Type="Tables" Schema="canevas" />
+          <EntitySet Name="unit_struct" EntityType="canevasModel.Store.unit_struct" store:Type="Tables" Schema="canevas" />
+          <EntitySet Name="user" EntityType="canevasModel.Store.user" store:Type="Tables" Schema="canevas" />
+          <AssociationSet Name="cellule_ibfk_1" Association="canevasModel.Store.cellule_ibfk_1">
+            <End Role="ligne" EntitySet="ligne" />
+            <End Role="cellule" EntitySet="cellule" />
+          </AssociationSet>
+          <AssociationSet Name="cellule_ibfk_2" Association="canevasModel.Store.cellule_ibfk_2">
+            <End Role="colonne" EntitySet="colonne" />
+            <End Role="cellule" EntitySet="cellule" />
+          </AssociationSet>
+          <AssociationSet Name="cellule_ibfk_3" Association="canevasModel.Store.cellule_ibfk_3">
+            <End Role="user" EntitySet="user" />
+            <End Role="cellule" EntitySet="cellule" />
+          </AssociationSet>
+          <AssociationSet Name="colonne_ibfk_1" Association="canevasModel.Store.colonne_ibfk_1">
+            <End Role="tableau" EntitySet="tableau" />
+            <End Role="colonne" EntitySet="colonne" />
+          </AssociationSet>
+          <AssociationSet Name="droit_remplissage_ibfk_1" Association="canevasModel.Store.droit_remplissage_ibfk_1">
+            <End Role="tableau" EntitySet="tableau" />
+            <End Role="droit_remplissage" EntitySet="droit_remplissage" />
+          </AssociationSet>
+          <AssociationSet Name="droit_remplissage_ibfk_2" Association="canevasModel.Store.droit_remplissage_ibfk_2">
+            <End Role="unit_struct" EntitySet="unit_struct" />
+            <End Role="droit_remplissage" EntitySet="droit_remplissage" />
+          </AssociationSet>
+          <AssociationSet Name="ligne_ibfk_1" Association="canevasModel.Store.ligne_ibfk_1">
+            <End Role="tableau" EntitySet="tableau" />
+            <End Role="ligne" EntitySet="ligne" />
+          </AssociationSet>
+          <AssociationSet Name="unit_struct_ibfk_1" Association="canevasModel.Store.unit_struct_ibfk_1">
+            <End Role="unit_struct" EntitySet="unit_struct" />
+            <End Role="unit_struct1" EntitySet="unit_struct" />
+          </AssociationSet>
+          <AssociationSet Name="user_ibfk_1" Association="canevasModel.Store.user_ibfk_1">
+            <End Role="unit_struct" EntitySet="unit_struct" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="cellule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nom_cellule" Type="varchar" MaxLength="255" />
+          <Property Name="valeur" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="id_ligne" Type="int" />
+          <Property Name="id_colonne" Type="int" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="updated_at" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="colonne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="intitule" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="type_colonne" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="id_tab" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="updated_at" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="droit_remplissage">
+          <Key>
+            <PropertyRef Name="Id_tab" />
+            <PropertyRef Name="Id_unit" />
+          </Key>
+          <Property Name="Id_tab" Type="int" Nullable="false" />
+          <Property Name="Id_unit" Type="int" Nullable="false" />
+          <Property Name="fermer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ligne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="intitule" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="id_tab" Type="int" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="updated_at" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tableau">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nom_tab" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="updated_at" Type="varchar" MaxLength="50" />
+          <Property Name="etat" Type="int" />
+        </EntityType>
+        <EntityType Name="unit_struct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="intitule" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="unite_mere" Type="int" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="updated_at" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="prenom" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="login" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="mdp" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="type" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="unit_struct" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="varchar" MaxLength="50" />
+          <Property Name="updated_at" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="cellule_ibfk_1">
+          <End Role="ligne" Type="canevasModel.Store.ligne" Multiplicity="0..1" />
+          <End Role="cellule" Type="canevasModel.Store.cellule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ligne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cellule">
+              <PropertyRef Name="id_ligne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cellule_ibfk_2">
+          <End Role="colonne" Type="canevasModel.Store.colonne" Multiplicity="0..1" />
+          <End Role="cellule" Type="canevasModel.Store.cellule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colonne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cellule">
+              <PropertyRef Name="id_colonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cellule_ibfk_3">
+          <End Role="user" Type="canevasModel.Store.user" Multiplicity="0..1" />
+          <End Role="cellule" Type="canevasModel.Store.cellule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cellule">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="colonne_ibfk_1">
+          <End Role="tableau" Type="canevasModel.Store.tableau" Multiplicity="1" />
+          <End Role="colonne" Type="canevasModel.Store.colonne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableau">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="colonne">
+              <PropertyRef Name="id_tab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="droit_remplissage_ibfk_1">
+          <End Role="tableau" Type="canevasModel.Store.tableau" Multiplicity="1" />
+          <End Role="droit_remplissage" Type="canevasModel.Store.droit_remplissage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableau">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="droit_remplissage">
+              <PropertyRef Name="Id_tab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="droit_remplissage_ibfk_2">
+          <End Role="unit_struct" Type="canevasModel.Store.unit_struct" Multiplicity="1" />
+          <End Role="droit_remplissage" Type="canevasModel.Store.droit_remplissage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_struct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="droit_remplissage">
+              <PropertyRef Name="Id_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ligne_ibfk_1">
+          <End Role="tableau" Type="canevasModel.Store.tableau" Multiplicity="0..1" />
+          <End Role="ligne" Type="canevasModel.Store.ligne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableau">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ligne">
+              <PropertyRef Name="id_tab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="unit_struct_ibfk_1">
+          <End Role="unit_struct" Type="canevasModel.Store.unit_struct" Multiplicity="0..1" />
+          <End Role="unit_struct1" Type="canevasModel.Store.unit_struct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_struct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="unit_struct1">
+              <PropertyRef Name="unite_mere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_ibfk_1">
+          <End Role="unit_struct" Type="canevasModel.Store.unit_struct" Multiplicity="1" />
+          <End Role="user" Type="canevasModel.Store.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_struct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="unit_struct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="canevasModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="canevasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cellules" EntityType="canevasModel.cellule" />
+          <EntitySet Name="colonnes" EntityType="canevasModel.colonne" />
+          <EntitySet Name="lignes" EntityType="canevasModel.ligne" />
+          <EntitySet Name="tableaux" EntityType="canevasModel.tableau" />
+          <EntitySet Name="users" EntityType="canevasModel.user" />
+          <AssociationSet Name="cellule_ibfk_1" Association="canevasModel.cellule_ibfk_1">
+            <End Role="ligne" EntitySet="lignes" />
+            <End Role="cellule" EntitySet="cellules" />
+          </AssociationSet>
+          <AssociationSet Name="cellule_ibfk_2" Association="canevasModel.cellule_ibfk_2">
+            <End Role="colonne" EntitySet="colonnes" />
+            <End Role="cellule" EntitySet="cellules" />
+          </AssociationSet>
+          <AssociationSet Name="cellule_ibfk_3" Association="canevasModel.cellule_ibfk_3">
+            <End Role="user" EntitySet="users" />
+            <End Role="cellule" EntitySet="cellules" />
+          </AssociationSet>
+          <AssociationSet Name="colonne_ibfk_1" Association="canevasModel.colonne_ibfk_1">
+            <End Role="tableau" EntitySet="tableaux" />
+            <End Role="colonne" EntitySet="colonnes" />
+          </AssociationSet>
+          <AssociationSet Name="ligne_ibfk_1" Association="canevasModel.ligne_ibfk_1">
+            <End Role="tableau" EntitySet="tableaux" />
+            <End Role="ligne" EntitySet="lignes" />
+          </AssociationSet>
+          <EntitySet Name="unit_struct" EntityType="canevasModel.unit_struct" />
+          <AssociationSet Name="unit_struct_ibfk_1" Association="canevasModel.unit_struct_ibfk_1">
+            <End Role="unit_struct" EntitySet="unit_struct" />
+            <End Role="unit_struct1" EntitySet="unit_struct" />
+          </AssociationSet>
+          <AssociationSet Name="user_ibfk_1" Association="canevasModel.user_ibfk_1">
+            <End Role="unit_struct" EntitySet="unit_struct" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <EntitySet Name="droit_remplissage" EntityType="canevasModel.droit_remplissage" />
+          <AssociationSet Name="droit_remplissage_ibfk_1" Association="canevasModel.droit_remplissage_ibfk_1">
+            <End Role="tableau" EntitySet="tableaux" />
+            <End Role="droit_remplissage" EntitySet="droit_remplissage" />
+          </AssociationSet>
+          <AssociationSet Name="droit_remplissage_ibfk_2" Association="canevasModel.droit_remplissage_ibfk_2">
+            <End Role="unit_struct" EntitySet="unit_struct" />
+            <End Role="droit_remplissage" EntitySet="droit_remplissage" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="cellule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_cellule" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="valeur" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="id_ligne" Type="Int32" />
+          <Property Name="id_colonne" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="created_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="updated_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ligne" Relationship="canevasModel.cellule_ibfk_1" FromRole="cellule" ToRole="ligne" />
+          <NavigationProperty Name="colonne" Relationship="canevasModel.cellule_ibfk_2" FromRole="cellule" ToRole="colonne" />
+          <NavigationProperty Name="user" Relationship="canevasModel.cellule_ibfk_3" FromRole="cellule" ToRole="user" />
+        </EntityType>
+        <EntityType Name="colonne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intitule" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="type_colonne" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="id_tab" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="updated_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="cellules" Relationship="canevasModel.cellule_ibfk_2" FromRole="colonne" ToRole="cellule" />
+          <NavigationProperty Name="tableau" Relationship="canevasModel.colonne_ibfk_1" FromRole="colonne" ToRole="tableau" />
+        </EntityType>
+        <EntityType Name="ligne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intitule" Type="String" MaxLength="100" Unicode="false" FixedLength="false" Nullable="false" />
+          <Property Name="id_tab" Type="Int32" />
+          <Property Name="created_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="updated_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="cellules" Relationship="canevasModel.cellule_ibfk_1" FromRole="ligne" ToRole="cellule" />
+          <NavigationProperty Name="tableau" Relationship="canevasModel.ligne_ibfk_1" FromRole="ligne" ToRole="tableau" />
+        </EntityType>
+        <EntityType Name="tableau">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_tab" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="created_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="updated_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="etat" Type="Int32" />
+          <NavigationProperty Name="colonnes" Relationship="canevasModel.colonne_ibfk_1" FromRole="tableau" ToRole="colonne" />
+          <NavigationProperty Name="lignes" Relationship="canevasModel.ligne_ibfk_1" FromRole="tableau" ToRole="ligne" />
+          <NavigationProperty Name="droit_remplissage" Relationship="canevasModel.droit_remplissage_ibfk_1" FromRole="tableau" ToRole="droit_remplissage" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="mdp" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="unit_struct" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="updated_at" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="cellules" Relationship="canevasModel.cellule_ibfk_3" FromRole="user" ToRole="cellule" />
+          <NavigationProperty Name="unit_struct1" Relationship="canevasModel.user_ibfk_1" FromRole="user" ToRole="unit_struct" />
+        </EntityType>
+        <Association Name="cellule_ibfk_1">
+          <End Role="ligne" Type="canevasModel.ligne" Multiplicity="0..1" />
+          <End Role="cellule" Type="canevasModel.cellule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ligne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cellule">
+              <PropertyRef Name="id_ligne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cellule_ibfk_2">
+          <End Role="colonne" Type="canevasModel.colonne" Multiplicity="0..1" />
+          <End Role="cellule" Type="canevasModel.cellule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colonne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cellule">
+              <PropertyRef Name="id_colonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cellule_ibfk_3">
+          <End Role="user" Type="canevasModel.user" Multiplicity="0..1" />
+          <End Role="cellule" Type="canevasModel.cellule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cellule">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="colonne_ibfk_1">
+          <End Role="tableau" Type="canevasModel.tableau" Multiplicity="1" />
+          <End Role="colonne" Type="canevasModel.colonne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableau">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="colonne">
+              <PropertyRef Name="id_tab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ligne_ibfk_1">
+          <End Role="tableau" Type="canevasModel.tableau" Multiplicity="0..1" />
+          <End Role="ligne" Type="canevasModel.ligne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableau">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ligne">
+              <PropertyRef Name="id_tab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="unit_struct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="intitule" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="unite_mere" />
+          <Property Type="String" Name="created_at" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="updated_at" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="unit_struct1" Relationship="canevasModel.unit_struct_ibfk_1" FromRole="unit_struct" ToRole="unit_struct1" />
+          <NavigationProperty Name="unit_struct2" Relationship="canevasModel.unit_struct_ibfk_1" FromRole="unit_struct1" ToRole="unit_struct" />
+          <NavigationProperty Name="users" Relationship="canevasModel.user_ibfk_1" FromRole="unit_struct" ToRole="user" />
+          <NavigationProperty Name="droit_remplissage" Relationship="canevasModel.droit_remplissage_ibfk_2" FromRole="unit_struct" ToRole="droit_remplissage" />
+        </EntityType>
+        <Association Name="unit_struct_ibfk_1">
+          <End Type="canevasModel.unit_struct" Role="unit_struct" Multiplicity="0..1" />
+          <End Type="canevasModel.unit_struct" Role="unit_struct1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_struct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="unit_struct1">
+              <PropertyRef Name="unite_mere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_ibfk_1">
+          <End Type="canevasModel.unit_struct" Role="unit_struct" Multiplicity="1" />
+          <End Type="canevasModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_struct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="unit_struct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="droit_remplissage">
+          <Key>
+            <PropertyRef Name="Id_tab" />
+            <PropertyRef Name="Id_unit" />
+          </Key>
+          <Property Type="Int32" Name="Id_tab" Nullable="false" />
+          <Property Type="Int32" Name="Id_unit" Nullable="false" />
+          <Property Type="Int32" Name="fermer" Nullable="false" />
+          <NavigationProperty Name="tableau" Relationship="canevasModel.droit_remplissage_ibfk_1" FromRole="droit_remplissage" ToRole="tableau" />
+          <NavigationProperty Name="unit_struct" Relationship="canevasModel.droit_remplissage_ibfk_2" FromRole="droit_remplissage" ToRole="unit_struct" />
+        </EntityType>
+        <Association Name="droit_remplissage_ibfk_1">
+          <End Type="canevasModel.tableau" Role="tableau" Multiplicity="1" />
+          <End Type="canevasModel.droit_remplissage" Role="droit_remplissage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableau">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="droit_remplissage">
+              <PropertyRef Name="Id_tab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="droit_remplissage_ibfk_2">
+          <End Type="canevasModel.unit_struct" Role="unit_struct" Multiplicity="1" />
+          <End Type="canevasModel.droit_remplissage" Role="droit_remplissage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_struct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="droit_remplissage">
+              <PropertyRef Name="Id_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="canevasModelStoreContainer" CdmEntityContainer="canevasEntities">
+          <EntitySetMapping Name="cellules">
+            <EntityTypeMapping TypeName="canevasModel.cellule">
+              <MappingFragment StoreEntitySet="cellule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nom_cellule" ColumnName="nom_cellule" />
+                <ScalarProperty Name="valeur" ColumnName="valeur" />
+                <ScalarProperty Name="id_ligne" ColumnName="id_ligne" />
+                <ScalarProperty Name="id_colonne" ColumnName="id_colonne" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="colonnes">
+            <EntityTypeMapping TypeName="canevasModel.colonne">
+              <MappingFragment StoreEntitySet="colonne">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intitule" ColumnName="intitule" />
+                <ScalarProperty Name="type_colonne" ColumnName="type_colonne" />
+                <ScalarProperty Name="id_tab" ColumnName="id_tab" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lignes">
+            <EntityTypeMapping TypeName="canevasModel.ligne">
+              <MappingFragment StoreEntitySet="ligne">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intitule" ColumnName="intitule" />
+                <ScalarProperty Name="id_tab" ColumnName="id_tab" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tableaux">
+            <EntityTypeMapping TypeName="canevasModel.tableau">
+              <MappingFragment StoreEntitySet="tableau">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nom_tab" ColumnName="nom_tab" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="etat" ColumnName="etat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="canevasModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="mdp" ColumnName="mdp" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="unit_struct" ColumnName="unit_struct" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unit_struct">
+            <EntityTypeMapping TypeName="canevasModel.unit_struct">
+              <MappingFragment StoreEntitySet="unit_struct">
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="unite_mere" ColumnName="unite_mere" />
+                <ScalarProperty Name="intitule" ColumnName="intitule" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="droit_remplissage">
+            <EntityTypeMapping TypeName="canevasModel.droit_remplissage">
+              <MappingFragment StoreEntitySet="droit_remplissage">
+                <ScalarProperty Name="fermer" ColumnName="fermer" />
+                <ScalarProperty Name="Id_unit" ColumnName="Id_unit" />
+                <ScalarProperty Name="Id_tab" ColumnName="Id_tab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

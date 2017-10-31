@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="934d242449394106bf6c70d2d9718ddb" Name="Diagram1">
+        <EntityTypeShape EntityType="canevasModel.cellule" Width="1.5" PointX="4.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="canevasModel.colonne" Width="1.5" PointX="0.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="canevasModel.ligne" Width="1.5" PointX="7.625" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="canevasModel.tableau" Width="1.5" PointX="7.875" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="canevasModel.user" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="canevasModel.cellule_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="canevasModel.cellule_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="canevasModel.cellule_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="canevasModel.colonne_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="canevasModel.ligne_ibfk_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="canevasModel.unit_struct" Width="1.5" PointX="15.25" PointY="0.5" />
+        <AssociationConnector Association="canevasModel.unit_struct_ibfk_1" />
+        <AssociationConnector Association="canevasModel.user_ibfk_1" />
+        <EntityTypeShape EntityType="canevasModel.droit_remplissage" Width="1.5" PointX="3.4994799641424232" PointY="19.198566430806444" />
+        <AssociationConnector Association="canevasModel.droit_remplissage_ibfk_1" />
+        <AssociationConnector Association="canevasModel.droit_remplissage_ibfk_2" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
